@@ -28,9 +28,10 @@
   #root {
     font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: var(--ink);
-    max-width: 680px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 20px 14px 40px;
+    padding: 28px 24px 56px;
+    font-size: 16px;
   }
   .masthead {
     display: flex;
@@ -41,7 +42,7 @@
     margin-bottom: 24px;
   }
   .masthead h1 {
-    font-size: 24px;
+    font-size: 34px;
     font-weight: 700;
     margin: 0;
     letter-spacing: 0.5px;
@@ -49,7 +50,7 @@
     text-shadow: 0 0 10px rgba(0,255,245,0.65), 0 0 26px rgba(0,255,245,0.25);
   }
   .masthead .sub {
-    font-size: 11.5px;
+    font-size: 15px;
     color: var(--muted);
     letter-spacing: 0.3px;
   }
@@ -57,12 +58,12 @@
     background: linear-gradient(180deg, var(--panel-alt), var(--panel));
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 18px 20px;
+    padding: 24px 26px;
     margin-bottom: 16px;
     box-shadow: 0 0 0 1px rgba(0,255,245,0.03), 0 12px 30px -18px rgba(0,255,245,0.25);
   }
   .panel h2 {
-    font-size: 11.5px;
+    font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     font-weight: 700;
@@ -72,7 +73,7 @@
   }
   label {
     display: block;
-    font-size: 10.5px;
+    font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     color: var(--muted);
@@ -81,7 +82,7 @@
   input[type=text], input[type=password], input[type=date] {
     width: 100%;
     font-family: inherit;
-    font-size: 13.5px;
+    font-size: 17px;
     padding: 9px 10px;
     border: 1px solid var(--line);
     border-radius: 6px;
@@ -103,7 +104,7 @@
   }
   .btn {
     font-family: inherit;
-    font-size: 12.5px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.4px;
     text-transform: uppercase;
@@ -133,7 +134,7 @@
   .btn-ghost:hover { color: var(--cyan); border-color: var(--cyan-dim); }
   .btn-danger { background: transparent; color: var(--danger); }
   .helptext {
-    font-size: 10.5px;
+    font-size: 18px;
     color: var(--muted);
     margin-top: 10px;
     line-height: 1.6;
@@ -153,12 +154,12 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 10px;
-    padding: 11px 4px;
+    padding: 14px 4px;
     border-bottom: 1px solid var(--line);
   }
   .friend:last-child { border-bottom: none; }
   .friend .days {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
     flex-shrink: 0;
     text-align: center;
@@ -176,12 +177,12 @@
   }
   .friend .name {
     flex-grow: 1;
-    font-size: 14px;
+    font-size: 18px;
     min-width: 80px;
     color: var(--ink);
   }
   .friend .date {
-    font-size: 11px;
+    font-size: 14.5px;
     color: var(--muted);
     width: 100%;
     order: 5;
@@ -193,7 +194,7 @@
     border: none;
     color: var(--muted);
     cursor: pointer;
-    font-size: 10.5px;
+    font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 0.3px;
     margin-left: 4px;
@@ -201,7 +202,7 @@
   .friend .del:hover { color: var(--magenta); }
   .empty {
     color: var(--muted);
-    font-size: 12.5px;
+    font-size: 16px;
     padding: 20px 4px;
     text-align: center;
   }
@@ -213,13 +214,13 @@
   .columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 24px;
   }
   @media (max-width: 640px) {
     .columns { grid-template-columns: 1fr; }
   }
   .column-header {
-    font-size: 11px;
+    font-size: 14.5px;
     font-weight: 700;
     color: var(--cyan);
     text-transform: uppercase;
@@ -232,7 +233,7 @@
   select {
     width: 100%;
     font-family: inherit;
-    font-size: 13.5px;
+    font-size: 17px;
     padding: 9px 10px;
     border: 1px solid var(--line);
     border-radius: 6px;
@@ -511,7 +512,7 @@ function App() {
 
       <div className="panel">
         <h2>Add a friend</h2>
-        <div className="row3">
+        <div className="row3" style={{gridTemplateColumns: '1fr 1fr'}}>
           <div>
             <label>Name</label>
             <input type="text" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Jordan" />
@@ -520,12 +521,9 @@ function App() {
             <label>Birthday</label>
             <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} />
           </div>
-          <div>
-            <label>Group</label>
-            <select value={newCategory} onChange={e => setNewCategory(e.target.value)}>
-              {CATEGORIES.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}
-            </select>
-          </div>
+        </div>
+        <div className="helptext" style={{marginTop: -4, marginBottom: 12}}>
+          New entries start in Friends — drag them into Family or Extended/Other below if needed.
         </div>
         <button className="btn btn-candle" disabled={!newName.trim() || !newDate || loading} onClick={handleAdd}>
           Add birthday
