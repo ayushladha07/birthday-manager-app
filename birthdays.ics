@@ -245,4 +245,15 @@ ACTION:DISPLAY
 DESCRIPTION:scooba's birthday is tomorrow!
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:birthday-abhinav-varahala-22@birthday-manager
+DTSTART;VALUE=DATE:20080904
+RRULE:FREQ=YEARLY
+SUMMARY:abhinav varahala's Birthday
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:abhinav varahala's birthday is tomorrow!
+END:VALARM
+END:VEVENT
 END:VCALENDAR
