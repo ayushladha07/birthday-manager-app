@@ -202,9 +202,10 @@ function formatDate(value) {
 }
 
 function App() {
-  const [owner, setOwner] = useState('');
-  const [repo, setRepo] = useState('');
-  const [token, setToken] = useState('');
+  const [owner, setOwner] = useState(() => localStorage.getItem('bday_owner') || '');
+  const [repo, setRepo] = useState(() => localStorage.getItem('bday_repo') || '');
+  const [token, setToken] = useState(() => localStorage.getItem('bday_token') || '');
+  const [rememberMe, setRememberMe] = useState(() => !!localStorage.getItem('bday_token'));
   const [connected, setConnected] = useState(false);
   const [sha, setSha] = useState(null);
   const [friends, setFriends] = useState([]); // [{name, date}]
@@ -251,11 +252,28 @@ function App() {
       setSha(data.sha);
       setConnected(true);
       setStatus({ type: 'ok', text: 'Connected — this is live from your repo.' });
+      if (rememberMe) {
+        localStorage.setItem('bday_owner', owner);
+        localStorage.setItem('bday_repo', repo);
+        localStorage.setItem('bday_token', token);
+      } else {
+        localStorage.removeItem('bday_owner');
+        localStorage.removeItem('bday_repo');
+        localStorage.removeItem('bday_token');
+      }
     } catch (e) {
       setStatus({ type: 'err', text: 'Something went wrong reading the file: ' + e.message });
     }
     setLoading(false);
-  }, [apiUrl, token]);
+  }, [apiUrl, token, owner, repo, rememberMe]);
+
+  useEffect(() => {
+    // If we loaded saved credentials from localStorage, connect automatically.
+    if (owner && repo && token && rememberMe) {
+      loadFromGitHub();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const saveToGitHub = useCallback(async (updatedFriends) => {
     setLoading(true);
@@ -363,6 +381,10 @@ function App() {
               <input type="password" value={token} onChange={e => setToken(e.target.value)} placeholder="github_pat_..." />
             </div>
           </div>
+          <label style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 14, cursor: 'pointer'}}>
+            <input type="checkbox" checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} style={{width: 'auto', margin: 0}} />
+            <span style={{fontSize: 12.5, color: 'var(--muted)'}}>Remember these on this device (so I don't have to re-enter next time)</span>
+          </label>
           <button className="btn btn-primary" disabled={!owner || !repo || !token || loading} onClick={loadFromGitHub}>
             {loading ? 'Connecting…' : 'Connect'}
           </button>
@@ -370,7 +392,9 @@ function App() {
           <div className="helptext">
             Create a token at github.com/settings/tokens → "Fine-grained tokens" → New token.
             Scope it to only this one repository, with "Contents: Read and write" permission — nothing else.
-            The token stays in this page's memory only; it's not saved anywhere and disappears if you reload.
+            If you check "Remember these," they're saved in this browser's local storage on this device only —
+            not sent anywhere else, but visible to anyone who uses this browser on this device. Leave it
+            unchecked on a shared or public computer.
           </div>
         </div>
       </div>
@@ -448,6 +472,14 @@ function App() {
 
       <div className="footer-actions">
         <button className="btn btn-ghost" onClick={loadFromGitHub} disabled={loading}>Refresh from GitHub</button>
+        <button className="btn btn-ghost" onClick={() => {
+          localStorage.removeItem('bday_owner');
+          localStorage.removeItem('bday_repo');
+          localStorage.removeItem('bday_token');
+          setConnected(false);
+          setToken('');
+          setRememberMe(false);
+        }}>Forget saved login</button>
       </div>
     </div>
   );
