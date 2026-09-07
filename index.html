@@ -1,0 +1,460 @@
+<div id="root"></div>
+<style>
+  :root {
+    --ink: #16161a;
+    --paper: #faf7f2;
+    --candle: #c76b3f;
+    --candle-dim: #e8b592;
+    --wick: #2f5d4f;
+    --line: #e4ddd0;
+    --muted: #8a8378;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: transparent; }
+  #root {
+    font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    color: var(--ink);
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 8px 4px 40px;
+  }
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+  .masthead h1 {
+    font-size: 27px;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.2px;
+  }
+  .masthead .sub {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .panel h2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    text-transform: none;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  label {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  input[type=text], input[type=password], input[type=date] {
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: white;
+    color: var(--ink);
+  }
+  input:focus { outline: 2px solid var(--candle-dim); outline-offset: 1px; }
+  .row3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .btn {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 10px 16px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary { background: var(--ink); color: white; }
+  .btn-candle { background: var(--candle); color: white; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+  .btn-danger { background: transparent; color: #a3432f; }
+  .helptext {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .status {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12.5px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+  .status.ok { background: #eaf2ee; color: var(--wick); }
+  .status.err { background: #f8e9e5; color: #a3432f; }
+  .friend-list { list-style: none; margin: 0; padding: 0; }
+  .friend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .friend:last-child { border-bottom: none; }
+  .friend .days {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    width: 54px;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 20px;
+    background: var(--candle-dim);
+    color: #7a3418;
+  }
+  .friend .days.today { background: var(--candle); color: white; }
+  .friend .name {
+    flex-grow: 1;
+    font-size: 16px;
+  }
+  .friend .date {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12.5px;
+    color: var(--muted);
+    width: 70px;
+  }
+  .friend .del {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  .friend .del:hover { color: #a3432f; }
+  .empty {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 20px 4px;
+    text-align: center;
+  }
+  .footer-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+</style>
+
+<script type="text/babel">
+const { useState, useEffect, useCallback } = React;
+
+// Accepts either "MM-DD" or "YYYY-MM-DD"
+function parseParts(value) {
+  const parts = value.split('-').map(Number);
+  if (parts.length === 2) return { mm: parts[0], dd: parts[1], year: null };
+  return { mm: parts[1], dd: parts[2], year: parts[0] };
+}
+
+function daysUntil(value) {
+  const { mm, dd } = parseParts(value);
+  const now = new Date();
+  const todayLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let target = new Date(now.getFullYear(), mm - 1, dd);
+  if (target < todayLocal) target = new Date(now.getFullYear() + 1, mm - 1, dd);
+  return Math.round((target - todayLocal) / 86400000);
+}
+
+// Age they'll be turning on their next occurrence of this birthday, or null if birth year unknown
+function turningAge(value) {
+  const { mm, dd, year } = parseParts(value);
+  if (!year) return null;
+  const now = new Date();
+  const todayLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let targetYear = now.getFullYear();
+  const target = new Date(targetYear, mm - 1, dd);
+  if (target < todayLocal) targetYear += 1;
+  return targetYear - year;
+}
+
+function formatDate(value) {
+  const { mm, dd, year } = parseParts(value);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return year ? `${months[mm-1]} ${dd}, ${year}` : `${months[mm-1]} ${dd}`;
+}
+
+function App() {
+  const [owner, setOwner] = useState('');
+  const [repo, setRepo] = useState('');
+  const [token, setToken] = useState('');
+  const [connected, setConnected] = useState(false);
+  const [sha, setSha] = useState(null);
+  const [friends, setFriends] = useState([]); // [{name, date}]
+  const [status, setStatus] = useState(null); // {type, text}
+  const [loading, setLoading] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newDate, setNewDate] = useState('');
+  const [editingName, setEditingName] = useState(null); // name of friend currently being edited
+  const [editName, setEditName] = useState('');
+  const [editDate, setEditDate] = useState('');
+
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/birthdays.json`;
+
+  const loadFromGitHub = useCallback(async () => {
+    setLoading(true);
+    setStatus(null);
+    try {
+      const res = await fetch(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github+json',
+        },
+      });
+      if (res.status === 404) {
+        setStatus({ type: 'err', text: "Couldn't find birthdays.json in that repo. Check the username and repo name." });
+        setLoading(false);
+        return;
+      }
+      if (res.status === 401 || res.status === 403) {
+        setStatus({ type: 'err', text: 'GitHub rejected that token. Double check it has repo access and hasn\'t expired.' });
+        setLoading(false);
+        return;
+      }
+      if (!res.ok) {
+        setStatus({ type: 'err', text: `GitHub returned an error (${res.status}). Try again in a moment.` });
+        setLoading(false);
+        return;
+      }
+      const data = await res.json();
+      const decoded = decodeURIComponent(escape(atob(data.content)));
+      const parsed = JSON.parse(decoded);
+      const list = Object.entries(parsed).map(([name, date]) => ({ name, date }));
+      setFriends(list);
+      setSha(data.sha);
+      setConnected(true);
+      setStatus({ type: 'ok', text: 'Connected — this is live from your repo.' });
+    } catch (e) {
+      setStatus({ type: 'err', text: 'Something went wrong reading the file: ' + e.message });
+    }
+    setLoading(false);
+  }, [apiUrl, token]);
+
+  const saveToGitHub = useCallback(async (updatedFriends) => {
+    setLoading(true);
+    try {
+      const obj = {};
+      updatedFriends.forEach(f => { obj[f.name] = f.date; });
+      const jsonStr = JSON.stringify(obj, null, 2) + '\n';
+      const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
+      const res = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github+json',
+        },
+        body: JSON.stringify({
+          message: 'Update birthdays.json via Birthday Manager',
+          content: b64,
+          sha: sha,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setStatus({ type: 'err', text: 'Save failed: ' + (err.message || res.status) });
+        setLoading(false);
+        return false;
+      }
+      const data = await res.json();
+      setSha(data.content.sha);
+      setStatus({ type: 'ok', text: 'Saved — synced to GitHub, your reminders will use this.' });
+      setLoading(false);
+      return true;
+    } catch (e) {
+      setStatus({ type: 'err', text: 'Save failed: ' + e.message });
+      setLoading(false);
+      return false;
+    }
+  }, [apiUrl, token, sha]);
+
+  const handleAdd = async () => {
+    if (!newName.trim() || !newDate) return;
+    // newDate comes from the date input as YYYY-MM-DD — keep the full
+    // date (including year) so we can announce the age they're turning.
+    const updated = [...friends.filter(f => f.name !== newName.trim()), { name: newName.trim(), date: newDate }];
+    setFriends(updated);
+    setNewName('');
+    setNewDate('');
+    await saveToGitHub(updated);
+  };
+
+  const handleDelete = async (name) => {
+    const updated = friends.filter(f => f.name !== name);
+    setFriends(updated);
+    await saveToGitHub(updated);
+  };
+
+  const startEdit = (f) => {
+    setEditingName(f.name);
+    setEditName(f.name);
+    // Date input needs YYYY-MM-DD. If this entry has no year on file,
+    // default to this year so the field isn't empty — it stays untouched
+    // in storage unless the person actually edits the date.
+    const { mm, dd, year } = parseParts(f.date);
+    const y = year || new Date().getFullYear();
+    setEditDate(`${y}-${String(mm).padStart(2,'0')}-${String(dd).padStart(2,'0')}`);
+  };
+
+  const cancelEdit = () => {
+    setEditingName(null);
+    setEditName('');
+    setEditDate('');
+  };
+
+  const saveEdit = async (originalName) => {
+    if (!editName.trim() || !editDate) return;
+    const updated = friends
+      .filter(f => f.name !== originalName)
+      .concat([{ name: editName.trim(), date: editDate }]);
+    setFriends(updated);
+    cancelEdit();
+    await saveToGitHub(updated);
+  };
+
+  const sorted = [...friends].sort((a, b) => daysUntil(a.date) - daysUntil(b.date));
+
+  if (!connected) {
+    return (
+      <div>
+        <div className="masthead">
+          <h1>Birthday Manager</h1>
+          <span className="sub">connects to your GitHub repo</span>
+        </div>
+        <div className="panel">
+          <h2>Connect to your repo</h2>
+          <div className="row3">
+            <div>
+              <label>GitHub username</label>
+              <input type="text" value={owner} onChange={e => setOwner(e.target.value)} placeholder="ayushladha07" />
+            </div>
+            <div>
+              <label>Repo name</label>
+              <input type="text" value={repo} onChange={e => setRepo(e.target.value)} placeholder="birthday" />
+            </div>
+            <div>
+              <label>Personal access token</label>
+              <input type="password" value={token} onChange={e => setToken(e.target.value)} placeholder="github_pat_..." />
+            </div>
+          </div>
+          <button className="btn btn-primary" disabled={!owner || !repo || !token || loading} onClick={loadFromGitHub}>
+            {loading ? 'Connecting…' : 'Connect'}
+          </button>
+          {status && <div className={`status ${status.type}`} style={{marginTop: 14}}>{status.text}</div>}
+          <div className="helptext">
+            Create a token at github.com/settings/tokens → "Fine-grained tokens" → New token.
+            Scope it to only this one repository, with "Contents: Read and write" permission — nothing else.
+            The token stays in this page's memory only; it's not saved anywhere and disappears if you reload.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="masthead">
+        <h1>Birthday Manager</h1>
+        <span className="sub">{owner}/{repo}</span>
+      </div>
+
+      {status && <div className={`status ${status.type}`}>{status.text}</div>}
+
+      <div className="panel">
+        <h2>Add a friend</h2>
+        <div className="row3">
+          <div style={{gridColumn: 'span 1'}}>
+            <label>Name</label>
+            <input type="text" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Jordan" />
+          </div>
+          <div style={{gridColumn: 'span 2'}}>
+            <label>Birthday</label>
+            <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} />
+          </div>
+        </div>
+        <button className="btn btn-candle" disabled={!newName.trim() || !newDate || loading} onClick={handleAdd}>
+          Add birthday
+        </button>
+      </div>
+
+      <div className="panel">
+        <h2>Upcoming ({friends.length})</h2>
+        {sorted.length === 0 ? (
+          <div className="empty">No birthdays yet — add your first friend above.</div>
+        ) : (
+          <ul className="friend-list">
+            {sorted.map(f => {
+              if (editingName === f.name) {
+                return (
+                  <li className="friend friend-editing" key={f.name}>
+                    <input
+                      type="text"
+                      value={editName}
+                      onChange={e => setEditName(e.target.value)}
+                      style={{flexGrow: 1, marginRight: 8}}
+                    />
+                    <input
+                      type="date"
+                      value={editDate}
+                      onChange={e => setEditDate(e.target.value)}
+                      style={{width: 150, marginRight: 8}}
+                    />
+                    <button className="btn btn-candle" style={{padding: '6px 12px', fontSize: 12.5}} disabled={loading} onClick={() => saveEdit(f.name)}>Save</button>
+                    <button className="del" style={{marginLeft: 10}} onClick={cancelEdit}>cancel</button>
+                  </li>
+                );
+              }
+              const d = daysUntil(f.date);
+              const age = turningAge(f.date);
+              return (
+                <li className="friend" key={f.name}>
+                  <span className={`days ${d === 0 ? 'today' : ''}`}>{d === 0 ? 'today' : `${d}d`}</span>
+                  <span className="name">{f.name}{age !== null ? <span style={{color: 'var(--muted)', fontWeight: 400}}> — turning {age}</span> : null}</span>
+                  <span className="date">{formatDate(f.date)}</span>
+                  <button className="del" onClick={() => startEdit(f)}>edit</button>
+                  <button className="del" onClick={() => handleDelete(f.name)}>remove</button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+
+      <div className="footer-actions">
+        <button className="btn btn-ghost" onClick={loadFromGitHub} disabled={loading}>Refresh from GitHub</button>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
