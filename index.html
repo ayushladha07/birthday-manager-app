@@ -157,6 +157,7 @@
   .friend .name {
     flex-grow: 1;
     font-size: 15.5px;
+    font-weight: 600;
     min-width: 80px;
     color: var(--ink);
   }
@@ -494,7 +495,7 @@ function App() {
 
       <div className="panel">
         <h2>Add a friend</h2>
-        <div className="row3" style={{gridTemplateColumns: '1fr 1fr'}}>
+        <div className="row3">
           <div>
             <label>Name</label>
             <input type="text" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Jordan" />
@@ -503,9 +504,12 @@ function App() {
             <label>Birthday</label>
             <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} />
           </div>
-        </div>
-        <div className="helptext" style={{marginTop: -4, marginBottom: 12}}>
-          New entries start in Friends — drag them into Family or Extended/Other below if needed.
+          <div>
+            <label>Group</label>
+            <select value={newCategory} onChange={e => setNewCategory(e.target.value)}>
+              {CATEGORIES.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}
+            </select>
+          </div>
         </div>
         <button className="btn btn-candle" disabled={!newName.trim() || !newDate || loading} onClick={handleAdd}>
           Add birthday
@@ -584,7 +588,7 @@ function App() {
                             }}
                           >
                             <span className={`days ${d === 0 ? 'today' : ''}`}>{d === 0 ? 'today' : `${d}d`}</span>
-                            <span className="name">{f.name}{age !== null ? <span style={{color: 'var(--muted)', fontWeight: 400}}> — {age}</span> : null}</span>
+                            <span className="name">{f.name}{age !== null ? <span style={{color: 'var(--muted)', fontWeight: 400, fontSize: '0.87em'}}> — {age}</span> : null}</span>
                             <button className="del" onClick={() => startEdit(f)}>edit</button>
                             <button className="del" onClick={() => handleDelete(f.name)}>remove</button>
                             <span className="date">{formatDate(f.date)}</span>
