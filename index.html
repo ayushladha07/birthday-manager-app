@@ -1,159 +1,207 @@
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jetbrains-mono/2.304/JetBrainsMono.css" rel="stylesheet" onerror="this.remove()">
 <div id="root"></div>
 <style>
   :root {
-    --ink: #16161a;
-    --paper: #faf7f2;
-    --candle: #c76b3f;
-    --candle-dim: #e8b592;
-    --wick: #2f5d4f;
-    --line: #e4ddd0;
-    --muted: #8a8378;
+    --bg: #050507;
+    --panel: #0c0c13;
+    --panel-alt: #0f1018;
+    --ink: #e8fdfb;
+    --muted: #7089a0;
+    --line: rgba(0, 255, 245, 0.16);
+    --cyan: #00fff5;
+    --cyan-dim: rgba(0, 255, 245, 0.35);
+    --magenta: #ff2ee6;
+    --green: #39ff14;
+    --amber: #ffb000;
+    --danger: #ff3860;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: transparent; }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(0,255,245,0.07), transparent 40%),
+      radial-gradient(circle at 85% 100%, rgba(255,46,230,0.06), transparent 40%);
+    background-attachment: fixed;
+  }
   #root {
-    font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     color: var(--ink);
-    max-width: 640px;
+    max-width: 680px;
     margin: 0 auto;
-    padding: 8px 4px 40px;
+    padding: 20px 14px 40px;
   }
   .masthead {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 14px;
-    margin-bottom: 22px;
+    border-bottom: 1px solid var(--cyan-dim);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
   }
   .masthead h1 {
-    font-size: 27px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 700;
     margin: 0;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.5px;
+    color: var(--cyan);
+    text-shadow: 0 0 10px rgba(0,255,245,0.65), 0 0 26px rgba(0,255,245,0.25);
   }
   .masthead .sub {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12.5px;
+    font-size: 11.5px;
     color: var(--muted);
+    letter-spacing: 0.3px;
   }
   .panel {
-    background: var(--paper);
+    background: linear-gradient(180deg, var(--panel-alt), var(--panel));
     border: 1px solid var(--line);
     border-radius: 10px;
     padding: 18px 20px;
     margin-bottom: 16px;
+    box-shadow: 0 0 0 1px rgba(0,255,245,0.03), 0 12px 30px -18px rgba(0,255,245,0.25);
   }
   .panel h2 {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 13px;
-    text-transform: none;
-    font-weight: 600;
-    color: var(--muted);
-    margin: 0 0 12px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    color: var(--magenta);
+    margin: 0 0 14px;
+    text-shadow: 0 0 8px rgba(255,46,230,0.45);
   }
   label {
     display: block;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12px;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
     color: var(--muted);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
   input[type=text], input[type=password], input[type=date] {
     width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
+    font-family: inherit;
+    font-size: 13.5px;
     padding: 9px 10px;
     border: 1px solid var(--line);
     border-radius: 6px;
-    background: white;
+    background: #08080e;
     color: var(--ink);
   }
-  input:focus { outline: 2px solid var(--candle-dim); outline-offset: 1px; }
+  input::placeholder { color: #46586a; }
+  input:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 1px var(--cyan), 0 0 12px rgba(0,255,245,0.35);
+  }
+  input[type=date]::-webkit-calendar-picker-indicator { filter: invert(0.8) sepia(1) saturate(6) hue-rotate(140deg); }
   .row3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1.4fr;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .btn {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 13.5px;
-    font-weight: 600;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
     border-radius: 6px;
     padding: 10px 16px;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
-    transition: opacity 0.15s;
+    transition: all 0.15s;
   }
-  .btn:hover { opacity: 0.85; }
-  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn-primary { background: var(--ink); color: white; }
-  .btn-candle { background: var(--candle); color: white; }
-  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
-  .btn-danger { background: transparent; color: #a3432f; }
-  .helptext {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 11.5px;
+  .btn:hover { filter: brightness(1.15); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; filter: none; }
+  .btn-primary {
+    background: var(--cyan);
+    color: #001414;
+    box-shadow: 0 0 14px rgba(0,255,245,0.45);
+  }
+  .btn-candle {
+    background: var(--magenta);
+    color: #1a0016;
+    box-shadow: 0 0 14px rgba(255,46,230,0.45);
+  }
+  .btn-ghost {
+    background: transparent;
     color: var(--muted);
-    margin-top: 8px;
-    line-height: 1.5;
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+  .btn-danger { background: transparent; color: var(--danger); }
+  .helptext {
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.6;
   }
   .status {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12.5px;
+    font-size: 12px;
     padding: 9px 12px;
     border-radius: 6px;
     margin-bottom: 14px;
+    border: 1px solid;
   }
-  .status.ok { background: #eaf2ee; color: var(--wick); }
-  .status.err { background: #f8e9e5; color: #a3432f; }
+  .status.ok { background: rgba(57,255,20,0.08); color: var(--green); border-color: rgba(57,255,20,0.35); }
+  .status.err { background: rgba(255,56,96,0.08); color: var(--danger); border-color: rgba(255,56,96,0.35); }
   .friend-list { list-style: none; margin: 0; padding: 0; }
   .friend {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
-    padding: 13px 4px;
+    gap: 8px 10px;
+    padding: 11px 4px;
     border-bottom: 1px solid var(--line);
   }
   .friend:last-child { border-bottom: none; }
   .friend .days {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    width: 54px;
     flex-shrink: 0;
     text-align: center;
-    padding: 5px 0;
+    padding: 4px 8px;
     border-radius: 20px;
-    background: var(--candle-dim);
-    color: #7a3418;
+    background: rgba(0,255,245,0.12);
+    color: var(--cyan);
+    border: 1px solid rgba(0,255,245,0.4);
   }
-  .friend .days.today { background: var(--candle); color: white; }
+  .friend .days.today {
+    background: var(--green);
+    color: #002400;
+    border-color: var(--green);
+    box-shadow: 0 0 10px rgba(57,255,20,0.6);
+  }
   .friend .name {
     flex-grow: 1;
-    font-size: 16px;
+    font-size: 14px;
+    min-width: 80px;
+    color: var(--ink);
   }
   .friend .date {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12.5px;
+    font-size: 11px;
     color: var(--muted);
-    width: 70px;
+    width: 100%;
+    order: 5;
+    padding-left: 46px;
   }
   .friend .del {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: inherit;
     background: none;
     border: none;
     color: var(--muted);
     cursor: pointer;
-    font-size: 12px;
-    margin-left: 6px;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-left: 4px;
   }
-  .friend .del:hover { color: #a3432f; }
+  .friend .del:hover { color: var(--magenta); }
   .empty {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12.5px;
     padding: 20px 4px;
     text-align: center;
   }
@@ -161,6 +209,35 @@
     display: flex;
     gap: 10px;
     margin-top: 4px;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 640px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+  .column-header {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+    text-shadow: 0 0 6px rgba(0,255,245,0.4);
+  }
+  select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 13.5px;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #08080e;
+    color: var(--ink);
   }
 </style>
 
@@ -202,20 +279,30 @@ function formatDate(value) {
 }
 
 function App() {
+  const CATEGORIES = [
+    { key: 'family', label: 'Family' },
+    { key: 'friends', label: 'Friends' },
+    { key: 'other', label: 'Extended / Other' },
+  ];
+
   const [owner, setOwner] = useState(() => localStorage.getItem('bday_owner') || '');
   const [repo, setRepo] = useState(() => localStorage.getItem('bday_repo') || '');
   const [token, setToken] = useState(() => localStorage.getItem('bday_token') || '');
   const [rememberMe, setRememberMe] = useState(() => !!localStorage.getItem('bday_token'));
   const [connected, setConnected] = useState(false);
   const [sha, setSha] = useState(null);
-  const [friends, setFriends] = useState([]); // [{name, date}]
+  const [friends, setFriends] = useState([]); // [{name, date, category}]
   const [status, setStatus] = useState(null); // {type, text}
   const [loading, setLoading] = useState(false);
   const [newName, setNewName] = useState('');
   const [newDate, setNewDate] = useState('');
+  const [newCategory, setNewCategory] = useState('friends');
   const [editingName, setEditingName] = useState(null); // name of friend currently being edited
   const [editName, setEditName] = useState('');
   const [editDate, setEditDate] = useState('');
+  const [editCategory, setEditCategory] = useState('friends');
+  const [draggingName, setDraggingName] = useState(null);
+  const [dragOverCat, setDragOverCat] = useState(null);
 
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/birthdays.json`;
 
@@ -247,7 +334,12 @@ function App() {
       const data = await res.json();
       const decoded = decodeURIComponent(escape(atob(data.content)));
       const parsed = JSON.parse(decoded);
-      const list = Object.entries(parsed).map(([name, date]) => ({ name, date }));
+      // Each value is either a plain "MM-DD"/"YYYY-MM-DD" string (older
+      // format, defaults to "friends") or {date, category} (newer format).
+      const list = Object.entries(parsed).map(([name, val]) => {
+        if (typeof val === 'string') return { name, date: val, category: 'friends' };
+        return { name, date: val.date, category: val.category || 'friends' };
+      });
       setFriends(list);
       setSha(data.sha);
       setConnected(true);
@@ -279,7 +371,7 @@ function App() {
     setLoading(true);
     try {
       const obj = {};
-      updatedFriends.forEach(f => { obj[f.name] = f.date; });
+      updatedFriends.forEach(f => { obj[f.name] = { date: f.date, category: f.category || 'friends' }; });
       const jsonStr = JSON.stringify(obj, null, 2) + '\n';
       const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
       const res = await fetch(apiUrl, {
@@ -316,7 +408,7 @@ function App() {
     if (!newName.trim() || !newDate) return;
     // newDate comes from the date input as YYYY-MM-DD — keep the full
     // date (including year) so we can announce the age they're turning.
-    const updated = [...friends.filter(f => f.name !== newName.trim()), { name: newName.trim(), date: newDate }];
+    const updated = [...friends.filter(f => f.name !== newName.trim()), { name: newName.trim(), date: newDate, category: newCategory }];
     setFriends(updated);
     setNewName('');
     setNewDate('');
@@ -329,9 +421,18 @@ function App() {
     await saveToGitHub(updated);
   };
 
+  const moveToCategory = async (name, newCat) => {
+    const target = friends.find(f => f.name === name);
+    if (!target || (target.category || 'friends') === newCat) return;
+    const updated = friends.map(f => f.name === name ? { ...f, category: newCat } : f);
+    setFriends(updated);
+    await saveToGitHub(updated);
+  };
+
   const startEdit = (f) => {
     setEditingName(f.name);
     setEditName(f.name);
+    setEditCategory(f.category || 'friends');
     // Date input needs YYYY-MM-DD. If this entry has no year on file,
     // default to this year so the field isn't empty — it stays untouched
     // in storage unless the person actually edits the date.
@@ -350,13 +451,11 @@ function App() {
     if (!editName.trim() || !editDate) return;
     const updated = friends
       .filter(f => f.name !== originalName)
-      .concat([{ name: editName.trim(), date: editDate }]);
+      .concat([{ name: editName.trim(), date: editDate, category: editCategory }]);
     setFriends(updated);
     cancelEdit();
     await saveToGitHub(updated);
   };
-
-  const sorted = [...friends].sort((a, b) => daysUntil(a.date) - daysUntil(b.date));
 
   if (!connected) {
     return (
@@ -413,13 +512,19 @@ function App() {
       <div className="panel">
         <h2>Add a friend</h2>
         <div className="row3">
-          <div style={{gridColumn: 'span 1'}}>
+          <div>
             <label>Name</label>
             <input type="text" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Jordan" />
           </div>
-          <div style={{gridColumn: 'span 2'}}>
+          <div>
             <label>Birthday</label>
             <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} />
+          </div>
+          <div>
+            <label>Group</label>
+            <select value={newCategory} onChange={e => setNewCategory(e.target.value)}>
+              {CATEGORIES.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}
+            </select>
           </div>
         </div>
         <button className="btn btn-candle" disabled={!newName.trim() || !newDate || loading} onClick={handleAdd}>
@@ -428,45 +533,90 @@ function App() {
       </div>
 
       <div className="panel">
-        <h2>Upcoming ({friends.length})</h2>
-        {sorted.length === 0 ? (
+        <h2>Everyone ({friends.length})</h2>
+        {friends.length === 0 ? (
           <div className="empty">No birthdays yet — add your first friend above.</div>
         ) : (
-          <ul className="friend-list">
-            {sorted.map(f => {
-              if (editingName === f.name) {
-                return (
-                  <li className="friend friend-editing" key={f.name}>
-                    <input
-                      type="text"
-                      value={editName}
-                      onChange={e => setEditName(e.target.value)}
-                      style={{flexGrow: 1, marginRight: 8}}
-                    />
-                    <input
-                      type="date"
-                      value={editDate}
-                      onChange={e => setEditDate(e.target.value)}
-                      style={{width: 150, marginRight: 8}}
-                    />
-                    <button className="btn btn-candle" style={{padding: '6px 12px', fontSize: 12.5}} disabled={loading} onClick={() => saveEdit(f.name)}>Save</button>
-                    <button className="del" style={{marginLeft: 10}} onClick={cancelEdit}>cancel</button>
-                  </li>
-                );
-              }
-              const d = daysUntil(f.date);
-              const age = turningAge(f.date);
+          <div className="columns">
+            {CATEGORIES.map(cat => {
+              const inCategory = friends
+                .filter(f => (f.category || 'friends') === cat.key)
+                .sort((a, b) => daysUntil(a.date) - daysUntil(b.date));
               return (
-                <li className="friend" key={f.name}>
-                  <span className={`days ${d === 0 ? 'today' : ''}`}>{d === 0 ? 'today' : `${d}d`}</span>
-                  <span className="name">{f.name}{age !== null ? <span style={{color: 'var(--muted)', fontWeight: 400}}> — turning {age}</span> : null}</span>
-                  <span className="date">{formatDate(f.date)}</span>
-                  <button className="del" onClick={() => startEdit(f)}>edit</button>
-                  <button className="del" onClick={() => handleDelete(f.name)}>remove</button>
-                </li>
+                <div
+                  key={cat.key}
+                  onDragOver={e => { e.preventDefault(); setDragOverCat(cat.key); }}
+                  onDragLeave={() => setDragOverCat(prev => prev === cat.key ? null : prev)}
+                  onDrop={e => {
+                    e.preventDefault();
+                    const name = e.dataTransfer.getData('text/plain');
+                    setDragOverCat(null);
+                    setDraggingName(null);
+                    if (name) moveToCategory(name, cat.key);
+                  }}
+                  style={{
+                    borderRadius: 8,
+                    outline: dragOverCat === cat.key ? `2px dashed var(--magenta)` : 'none',
+                    outlineOffset: 4,
+                    transition: 'outline 0.1s',
+                  }}
+                >
+                  <div className="column-header">{cat.label} ({inCategory.length})</div>
+                  {inCategory.length === 0 ? (
+                    <div className="empty" style={{padding: '10px 0'}}>{dragOverCat === cat.key ? 'Drop here' : 'Nobody here yet.'}</div>
+                  ) : (
+                    <ul className="friend-list">
+                      {inCategory.map(f => {
+                        if (editingName === f.name) {
+                          return (
+                            <li className="friend friend-editing" key={f.name} style={{flexDirection: 'column', alignItems: 'stretch'}}>
+                              <input
+                                type="text"
+                                value={editName}
+                                onChange={e => setEditName(e.target.value)}
+                                style={{marginBottom: 6}}
+                              />
+                              <input
+                                type="date"
+                                value={editDate}
+                                onChange={e => setEditDate(e.target.value)}
+                                style={{marginBottom: 6}}
+                              />
+                              <div>
+                                <button className="btn btn-candle" style={{padding: '6px 12px', fontSize: 12.5}} disabled={loading} onClick={() => saveEdit(f.name)}>Save</button>
+                                <button className="del" style={{marginLeft: 10}} onClick={cancelEdit}>cancel</button>
+                              </div>
+                            </li>
+                          );
+                        }
+                        const d = daysUntil(f.date);
+                        const age = turningAge(f.date);
+                        return (
+                          <li
+                            className="friend"
+                            key={f.name}
+                            draggable
+                            onDragStart={e => { e.dataTransfer.setData('text/plain', f.name); setDraggingName(f.name); }}
+                            onDragEnd={() => { setDraggingName(null); setDragOverCat(null); }}
+                            style={{
+                              cursor: 'grab',
+                              opacity: draggingName === f.name ? 0.4 : 1,
+                            }}
+                          >
+                            <span className={`days ${d === 0 ? 'today' : ''}`}>{d === 0 ? 'today' : `${d}d`}</span>
+                            <span className="name">{f.name}{age !== null ? <span style={{color: 'var(--muted)', fontWeight: 400}}> — {age}</span> : null}</span>
+                            <button className="del" onClick={() => startEdit(f)}>edit</button>
+                            <button className="del" onClick={() => handleDelete(f.name)}>remove</button>
+                            <span className="date">{formatDate(f.date)}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
               );
             })}
-          </ul>
+          </div>
         )}
       </div>
 
