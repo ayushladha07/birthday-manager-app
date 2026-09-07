@@ -289,4 +289,15 @@ ACTION:DISPLAY
 DESCRIPTION:sachi's birthday is tomorrow!
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:birthday-nikhil-vinay-26@birthday-manager
+DTSTART;VALUE=DATE:20071023
+RRULE:FREQ=YEARLY
+SUMMARY:nikhil/vinay's Birthday
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:nikhil/vinay's birthday is tomorrow!
+END:VALARM
+END:VEVENT
 END:VCALENDAR
