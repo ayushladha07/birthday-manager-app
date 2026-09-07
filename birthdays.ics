@@ -256,4 +256,15 @@ ACTION:DISPLAY
 DESCRIPTION:abhinav varahala's birthday is tomorrow!
 END:VALARM
 END:VEVENT
+BEGIN:VEVENT
+UID:birthday-neel-banga-23@birthday-manager
+DTSTART;VALUE=DATE:20080521
+RRULE:FREQ=YEARLY
+SUMMARY:neel banga's Birthday
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:neel banga's birthday is tomorrow!
+END:VALARM
+END:VEVENT
 END:VCALENDAR
