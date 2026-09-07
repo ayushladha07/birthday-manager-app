@@ -15,18 +15,7 @@ DESCRIPTION:sahith's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-anusha-1@birthday-manager
-DTSTART;VALUE=DATE:20060104
-RRULE:FREQ=YEARLY
-SUMMARY:anusha's Birthday
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:anusha's birthday is tomorrow!
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:birthday-rony-2@birthday-manager
+UID:birthday-rony-1@birthday-manager
 DTSTART;VALUE=DATE:20071228
 RRULE:FREQ=YEARLY
 SUMMARY:rony's Birthday
@@ -37,7 +26,7 @@ DESCRIPTION:rony's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-pratik-3@birthday-manager
+UID:birthday-pratik-2@birthday-manager
 DTSTART;VALUE=DATE:20080920
 RRULE:FREQ=YEARLY
 SUMMARY:pratik's Birthday
@@ -48,7 +37,7 @@ DESCRIPTION:pratik's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-praveen-4@birthday-manager
+UID:birthday-praveen-3@birthday-manager
 DTSTART;VALUE=DATE:20080903
 RRULE:FREQ=YEARLY
 SUMMARY:praveen's Birthday
@@ -59,7 +48,7 @@ DESCRIPTION:praveen's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-aarav-5@birthday-manager
+UID:birthday-aarav-4@birthday-manager
 DTSTART;VALUE=DATE:20081218
 RRULE:FREQ=YEARLY
 SUMMARY:aarav's Birthday
@@ -70,7 +59,7 @@ DESCRIPTION:aarav's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-vidip-6@birthday-manager
+UID:birthday-vidip-5@birthday-manager
 DTSTART;VALUE=DATE:20080620
 RRULE:FREQ=YEARLY
 SUMMARY:vidip's Birthday
@@ -81,7 +70,7 @@ DESCRIPTION:vidip's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-khrish-7@birthday-manager
+UID:birthday-khrish-6@birthday-manager
 DTSTART;VALUE=DATE:20080205
 RRULE:FREQ=YEARLY
 SUMMARY:khrish's Birthday
@@ -92,7 +81,7 @@ DESCRIPTION:khrish's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-mom-8@birthday-manager
+UID:birthday-mom-7@birthday-manager
 DTSTART;VALUE=DATE:19790509
 RRULE:FREQ=YEARLY
 SUMMARY:mom's Birthday
@@ -103,7 +92,7 @@ DESCRIPTION:mom's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-dad-9@birthday-manager
+UID:birthday-dad-8@birthday-manager
 DTSTART;VALUE=DATE:19750108
 RRULE:FREQ=YEARLY
 SUMMARY:dad's Birthday
@@ -114,7 +103,7 @@ DESCRIPTION:dad's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-ishaan-10@birthday-manager
+UID:birthday-ishaan-9@birthday-manager
 DTSTART;VALUE=DATE:20071116
 RRULE:FREQ=YEARLY
 SUMMARY:ishaan's Birthday
@@ -125,7 +114,7 @@ DESCRIPTION:ishaan's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-tanish-11@birthday-manager
+UID:birthday-tanish-10@birthday-manager
 DTSTART;VALUE=DATE:20080327
 RRULE:FREQ=YEARLY
 SUMMARY:tanish's Birthday
@@ -136,7 +125,7 @@ DESCRIPTION:tanish's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-prabhav-12@birthday-manager
+UID:birthday-prabhav-11@birthday-manager
 DTSTART;VALUE=DATE:20080327
 RRULE:FREQ=YEARLY
 SUMMARY:prabhav's Birthday
@@ -147,7 +136,7 @@ DESCRIPTION:prabhav's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-timmy-13@birthday-manager
+UID:birthday-timmy-12@birthday-manager
 DTSTART;VALUE=DATE:20080324
 RRULE:FREQ=YEARLY
 SUMMARY:timmy's Birthday
@@ -158,7 +147,7 @@ DESCRIPTION:timmy's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-arti-fart-14@birthday-manager
+UID:birthday-arti-fart-13@birthday-manager
 DTSTART;VALUE=DATE:20080714
 RRULE:FREQ=YEARLY
 SUMMARY:arti fart's Birthday
@@ -169,7 +158,7 @@ DESCRIPTION:arti fart's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-ap-15@birthday-manager
+UID:birthday-ap-14@birthday-manager
 DTSTART;VALUE=DATE:20080616
 RRULE:FREQ=YEARLY
 SUMMARY:ap's Birthday
@@ -180,7 +169,7 @@ DESCRIPTION:ap's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-roshan-16@birthday-manager
+UID:birthday-roshan-15@birthday-manager
 DTSTART;VALUE=DATE:20080728
 RRULE:FREQ=YEARLY
 SUMMARY:roshan's Birthday
@@ -191,7 +180,7 @@ DESCRIPTION:roshan's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-tanvi-17@birthday-manager
+UID:birthday-tanvi-16@birthday-manager
 DTSTART;VALUE=DATE:20041030
 RRULE:FREQ=YEARLY
 SUMMARY:tanvi's Birthday
@@ -202,7 +191,7 @@ DESCRIPTION:tanvi's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-srivath-18@birthday-manager
+UID:birthday-srivath-17@birthday-manager
 DTSTART;VALUE=DATE:20080612
 RRULE:FREQ=YEARLY
 SUMMARY:srivath's Birthday
@@ -213,7 +202,7 @@ DESCRIPTION:srivath's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-bhavana-19@birthday-manager
+UID:birthday-bhavana-18@birthday-manager
 DTSTART;VALUE=DATE:20080925
 RRULE:FREQ=YEARLY
 SUMMARY:bhavana's Birthday
@@ -224,7 +213,7 @@ DESCRIPTION:bhavana's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-arjun-mann-20@birthday-manager
+UID:birthday-arjun-mann-19@birthday-manager
 DTSTART;VALUE=DATE:20070910
 RRULE:FREQ=YEARLY
 SUMMARY:arjun mann's Birthday
@@ -235,7 +224,7 @@ DESCRIPTION:arjun mann's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-scooba-21@birthday-manager
+UID:birthday-scooba-20@birthday-manager
 DTSTART;VALUE=DATE:20060914
 RRULE:FREQ=YEARLY
 SUMMARY:scooba's Birthday
@@ -246,7 +235,7 @@ DESCRIPTION:scooba's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-abhinav-varahala-22@birthday-manager
+UID:birthday-abhinav-varahala-21@birthday-manager
 DTSTART;VALUE=DATE:20080904
 RRULE:FREQ=YEARLY
 SUMMARY:abhinav varahala's Birthday
@@ -257,7 +246,7 @@ DESCRIPTION:abhinav varahala's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-neel-banga-23@birthday-manager
+UID:birthday-neel-banga-22@birthday-manager
 DTSTART;VALUE=DATE:20080521
 RRULE:FREQ=YEARLY
 SUMMARY:neel banga's Birthday
@@ -268,7 +257,7 @@ DESCRIPTION:neel banga's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-saket-24@birthday-manager
+UID:birthday-saket-23@birthday-manager
 DTSTART;VALUE=DATE:20070621
 RRULE:FREQ=YEARLY
 SUMMARY:saket's Birthday
@@ -279,7 +268,7 @@ DESCRIPTION:saket's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-sachi-25@birthday-manager
+UID:birthday-sachi-24@birthday-manager
 DTSTART;VALUE=DATE:20050824
 RRULE:FREQ=YEARLY
 SUMMARY:sachi's Birthday
@@ -290,7 +279,7 @@ DESCRIPTION:sachi's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-nikhil-vinay-26@birthday-manager
+UID:birthday-nikhil-vinay-25@birthday-manager
 DTSTART;VALUE=DATE:20071023
 RRULE:FREQ=YEARLY
 SUMMARY:nikhil/vinay's Birthday
@@ -301,7 +290,7 @@ DESCRIPTION:nikhil/vinay's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-rudra-27@birthday-manager
+UID:birthday-rudra-26@birthday-manager
 DTSTART;VALUE=DATE:20080213
 RRULE:FREQ=YEARLY
 SUMMARY:rudra's Birthday
@@ -312,7 +301,7 @@ DESCRIPTION:rudra's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:birthday-prayag-28@birthday-manager
+UID:birthday-prayag-27@birthday-manager
 DTSTART;VALUE=DATE:02000926
 RRULE:FREQ=YEARLY
 SUMMARY:prayag's Birthday
@@ -320,6 +309,17 @@ BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
 DESCRIPTION:prayag's birthday is tomorrow!
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:birthday-anusha-28@birthday-manager
+DTSTART;VALUE=DATE:20060907
+RRULE:FREQ=YEARLY
+SUMMARY:anusha's Birthday
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:anusha's birthday is tomorrow!
 END:VALARM
 END:VEVENT
 END:VCALENDAR
